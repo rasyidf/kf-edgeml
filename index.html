@@ -16,7 +16,7 @@
 </head>
 
 <body>
-  <div class="container" id="app">
+  <div class="container is-fluid" id="app">
     <section class="section ">
       <div class="container">
         <h1 class="title">
@@ -27,12 +27,15 @@
         </p>
 
         <div class="container">
-          <div class="notification is-primary" v-if="isActive">
-            <button class="delete" v-on:click="isActive = !isActive"></button>
-            Kodesiana EdgeML saat ini dalam tahap <b>alpha</b>. Aplikasi mungkin tidak berjalan dengan baik pada browser
-            Anda. Gunakan browser berbasis Chromium seperti Chrome, Edge, dan Opera untuk mendapatkan pengalaman terbaik.
-            Berikan kritik dan saran melalui link berikut: LINK HERE
-            <button v-on:click="counter += 1">Add 1</button>
+          <div class="message is-primary" v-if="isActive">
+            <div class="message-body">
+              Kodesiana EdgeML saat ini dalam tahap <b>alpha</b>. Aplikasi mungkin tidak berjalan dengan baik pada
+              browser
+              Anda. Gunakan browser berbasis Chromium seperti Chrome, Edge, dan Opera untuk mendapatkan pengalaman
+              terbaik.
+              Berikan kritik dan saran melalui link berikut:<br />
+              <button class="button is-primary mt-3 is-small">FEEDBACK</button>
+            </div>
           </div>
         </div>
       </div>
@@ -41,68 +44,92 @@
     <section class="section pt-0">
       <div class="container box">
         <h2 class="subtitle">Data Modelling</h2>
-
-        Counter: {{ counter }}<br>
-
-        <button class="button is-primary" v-on:click="run">Run Training</button>
-        <button class="button is-link" v-on:click="run2">Load Model</button>
-        <button class="button is-link" v-on:click="save">Save Model</button>
-
-        <div class="container">
-          <div class="file">
-            <label class="file-label">
-              <input class="file-input" type="file" id="manifestFile" ref="manifestFile" v-on:change="modelManifestHandler()">
-              <span class="file-cta">
-                <span class="file-icon">
-                  <i class="fas fa-upload"></i>
-                </span>
-                <span class="file-label">
-                  Upload manifest (JSON)...
-                </span>
-              </span>
-            </label>
+        <div class="columns">
+          <div class="column is-6">
+            <button class="button is-primary is-light" v-on:click="run">Run Training</button>
+            <button class="button is-link is-light" v-on:click="run2">Load Model</button>
+            <button class="button is-link is-light" v-on:click="save">Save Model</button>
           </div>
+          <div class="column"></div>
+          <div class="column columns">
+            <div class="column">
+              <div class="file is-info is-light">
+                <label class="file-label">
+                  <input class="file-input" type="file" id="manifestFile" ref="manifestFile"
+                    v-on:change="modelManifestHandler()">
+                  <span class="file-cta">
+                    <span class="file-icon">
+                      <i class="fas fa-upload"></i>
+                    </span>
+                    <span class="file-label">
+                      Upload manifest (JSON)...
+                    </span>
+                  </span>
+                </label>
+              </div>
+            </div>
+            <div class="column">
+              <div class="file is-info is-light">
+                <label class="file-label">
+                  <input class="file-input" type="file" id="weightsFile" ref="weightsFile"
+                    v-on:change="modelWeightsHandler()">
+                  <span class="file-cta">
+                    <span class="file-icon">
+                      <i class="fas fa-upload"></i>
+                    </span>
+                    <span class="file-label">
+                      Upload weights (BIN)...
+                    </span>
+                  </span>
+                </label>
+              </div>
+            </div>
 
-          <div class="file">
-            <label class="file-label">
-              <input class="file-input" type="file" id="weightsFile" ref="weightsFile" v-on:change="modelWeightsHandler()">
-              <span class="file-cta">
-                <span class="file-icon">
-                  <i class="fas fa-upload"></i>
-                </span>
-                <span class="file-label">
-                  Upload weights (BIN)...
-                </span>
-              </span>
-            </label>
+
           </div>
         </div>
 
+
+
+      </div>
+    </section>
+    <section class="section pt-0">
+      <div class="container box">
         <div class="columns">
           <div class="column">
-            <div class="box">
+            <div class="box is-shadowless">
               <h2 class="subtitle">Original Data</h2>
               <div id="data"></div>
             </div>
-            <div class="box">
+            <div class="box is-shadowless">
               <h2 class="subtitle">Predicted Data</h2>
               <div id="evaluation"></div>
             </div>
           </div>
 
           <div class="column">
-            <div class="box">
+            <div class="box is-shadowless">
               <h2 class="subtitle">Model Summary</h2>
               <div id="summary"></div>
             </div>
-            <div class="box">
+            <div class="box is-shadowless">
               <h2 class="subtitle">Training History</h2>
               <div id="progress"></div>
-            </div>  
+            </div>
           </div>
         </div>
       </div>
     </section>
+
+    <footer class="footer">
+      <div class="content has-text-centered">
+        <p>
+          <strong>KF-EdgeML</strong> by <a href="https://github.com/fahminlb33">Fahmi Noor Fiqri</a>. The source code is
+          licensed
+          <a href="http://opensource.org/licenses/mit-license.php">MIT</a>.
+        </p>
+      </div>
+    </footer>
   </div>
 
   <script type="module" src="/src/main.ts"></script>

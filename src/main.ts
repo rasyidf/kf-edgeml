@@ -49,13 +49,15 @@ const KFEdgeApp = Vue.extend({
     modelManifestHandler() {
       const e = this.$refs.manifestFile as HTMLInputElement;
       if (!e.files?.length) return;
-      this.manifestFile = e.files[0];
+      const file = e.files.item(0);
+      this.manifestFile = file;
     },
 
     modelWeightsHandler() {
       const e = this.$refs.weightsFile as HTMLInputElement;
       if (!e.files?.length) return;
-      this.weightsFile = e.files[0];
+      const file = e.files.item(0);
+      this.weightsFile = file;
     },
 
     save() {
