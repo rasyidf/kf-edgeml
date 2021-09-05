@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="stylesheet" href="/node_modules/bulma/css/bulma.css">
+  <link rel="stylesheet" href="/node_modules/sweetalert2/dist/sweetalert2.css">
+  <link rel="stylesheet" href="/node_modules/@fortawesome/fontawesome-free/css/all.css">
+  <link rel="stylesheet" href="/src/styles/style.css">
+
+  <title>KF-EdgeML by Kodesiana</title>
+
+</head>
+
+<body>
+  <div class="container" id="app">
+    <section class="section ">
+      <div class="container">
+        <h1 class="title">
+          KF-EdgeML
+        </h1>
+        <p class="subtitle">
+          Selamat datang di Kodesiana EdgeML! Aplikasi untuk membuat model <i>deep learning</i> secara visual.
+        </p>
+
+        <div class="container">
+          <div class="notification is-primary" v-if="isActive">
+            <button class="delete" v-on:click="isActive = !isActive"></button>
+            Kodesiana EdgeML saat ini dalam tahap <b>alpha</b>. Aplikasi mungkin tidak berjalan dengan baik pada browser
+            Anda. Gunakan browser berbasis Chromium seperti Chrome, Edge, dan Opera untuk mendapatkan pengalaman terbaik.
+            Berikan kritik dan saran melalui link berikut: LINK HERE
+            <button v-on:click="counter += 1">Add 1</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section pt-0">
+      <div class="container box">
+        <h2 class="subtitle">Data Modelling</h2>
+
+        Counter: {{ counter }}<br>
+
+        <button class="button is-primary" v-on:click="run">Run Training</button>
+        <button class="button is-link" v-on:click="run2">Load Model</button>
+        <button class="button is-link" v-on:click="save">Save Model</button>
+
+        <div class="container">
+          <div class="file">
+            <label class="file-label">
+              <input class="file-input" type="file" id="manifestFile" ref="manifestFile" v-on:change="modelManifestHandler()">
+              <span class="file-cta">
+                <span class="file-icon">
+                  <i class="fas fa-upload"></i>
+                </span>
+                <span class="file-label">
+                  Upload manifest (JSON)...
+                </span>
+              </span>
+            </label>
+          </div>
+
+          <div class="file">
+            <label class="file-label">
+              <input class="file-input" type="file" id="weightsFile" ref="weightsFile" v-on:change="modelWeightsHandler()">
+              <span class="file-cta">
+                <span class="file-icon">
+                  <i class="fas fa-upload"></i>
+                </span>
+                <span class="file-label">
+                  Upload weights (BIN)...
+                </span>
+              </span>
+            </label>
+          </div>
+        </div>
+
+        <div class="columns">
+          <div class="column">
+            <div class="box">
+              <h2 class="subtitle">Original Data</h2>
+              <div id="data"></div>
+            </div>
+            <div class="box">
+              <h2 class="subtitle">Predicted Data</h2>
+              <div id="evaluation"></div>
+            </div>
+          </div>
+
+          <div class="column">
+            <div class="box">
+              <h2 class="subtitle">Model Summary</h2>
+              <div id="summary"></div>
+            </div>
+            <div class="box">
+              <h2 class="subtitle">Training History</h2>
+              <div id="progress"></div>
+            </div>  
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script type="module" src="/src/main.ts"></script>
+</body>
+
+</html>
